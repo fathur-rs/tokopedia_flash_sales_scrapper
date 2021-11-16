@@ -10,11 +10,11 @@ import os
 
 class HTML:
     Schedule = 'css-1g5b64m'
-    ProductContainer = 'css-1sxqhh0'
+    ProductContainer = 'css-y5gcsw'
     TimeStamp = 'css-mdfmy2'
-    ProductName = 'css-1f4mp12'
-    PriceDiscount = 'css-rhd610'
-    Price = 'css-dn6pvz'
+    ProductName = 'css-12fc2sy'
+    PriceDiscount = 'css-a94u6c'
+    Price = 'css-hwbdeb'
     Location = 'css-qjiozs'
 
 class DateParser:
