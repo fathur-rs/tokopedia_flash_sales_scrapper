@@ -10,21 +10,21 @@ import os
 
 class HTML:
     Schedule = 'css-1g5b64m'
-    ProductContainer = 'css-1sxqhh0'
+    ProductContainer = 'css-y5gcsw'
     TimeStamp = 'css-mdfmy2'
-    ProductName = 'css-1f4mp12'
-    PriceDiscount = 'css-rhd610'
-    Price = 'css-dn6pvz'
+    ProductName = 'css-12fc2sy'
+    PriceDiscount = 'css-a94u6c'
+    Price = 'css-hwbdeb'
     Location = 'css-qjiozs'
 
 class DateParser:
     def __init__(self, time):
         self.time = time
-        self.flash_sale_time = ''.join(re.findall(r'(\d{2}\_\d{2})', self.time)[0])
-        self.datetimenow = datetime.datetime.now().strftime('%Y-%m-%d')
 
     def __str__(self):
-        return str(self.datetimenow + '-' + self.flash_sale_time)
+        flash_sale_hour = ''.join(re.findall(r'(\d{2}\_\d{2})', self.time)[0])
+        flash_sale_date = datetime.datetime.now().strftime('%Y-%m-%d')
+        return str(flash_sale_date + '-' + flash_sale_hour)
 
 class TokopediaScrapper:
     def __init__(self, url):
@@ -38,6 +38,7 @@ class TokopediaScrapper:
 
         self.time = self.driver.find_element(By.CLASS_NAME, HTML.TimeStamp).text.replace(".", "_").replace(":", "_")
         self.date = DateParser(self.time)
+        print(self.date)
 
         catch = self.driver.find_element(By.CLASS_NAME, HTML.Schedule).text.split('\n')[0]
         if catch == 'Dimulai dalam':
@@ -59,7 +60,7 @@ class TokopediaScrapper:
                     product_price = product.find_element(By.CLASS_NAME, HTML.Price).text.replace('\n','').replace('Rp', '').replace('.', '')
                     product_price_discount = product.find_element(By.CLASS_NAME, HTML.PriceDiscount).text.replace('Rp', '').strip().replace('.', '')
                     store_location = product.find_element(By.CLASS_NAME, HTML.Location).text
-                    print(f"{number + 1}. {product_name} | {product_price[3:].strip()} | {product_price_discount} | {product_price[0:3].strip()} | {store_location}")
+                    print(f"{number + 1}. {product_name} | {product_price[3:].strip()} | {product_price_discount} | {str(product_price[0:3].strip())} | {store_location}")
                     self.data.append((number + 1,
                                       product_name,
                                       product_price[3:].strip(),
@@ -87,4 +88,3 @@ def main():
     else:
         pass
 main()
-
