@@ -38,7 +38,6 @@ class TokopediaScrapper:
 
         self.time = self.driver.find_element(By.CLASS_NAME, HTML.TimeStamp).text.replace(".", "_").replace(":", "_")
         self.date = DateParser(self.time)
-        print(self.date)
 
         catch = self.driver.find_element(By.CLASS_NAME, HTML.Schedule).text.split('\n')[0]
         if catch == 'Dimulai dalam':
